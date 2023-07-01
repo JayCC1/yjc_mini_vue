@@ -1,2 +1,3 @@
 # yjc_mini_vue
-mini-vue_practice
+
+mini-vue
