@@ -1,0 +1,9 @@
+node_modules
+.DS_Store
+dist
+dist-ssr
+*.zip
+dist.rar
+*.local
+docs
+components.d.ts
