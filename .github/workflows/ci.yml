@@ -13,34 +13,34 @@ jobs:
     steps:
       # 拉取检测项目代码
       - name: checkout repository
-      uses: actions/checkout@v2
-      # 给当前环境下载 node
+        uses: actions/checkout@v2
+        # 给当前环境下载 node
       - name: Use Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: "16.x"
-      # 设置文件缓存,并检查缓存
-      # 如果 key 名字缓存则直接将缓存的文件还原到 path 目录，从而减少 workflows(工作流)运行时间
-      # 若 key 没命中缓存时，在当前 Job 完成时将自动创建新缓存
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+        # 设置文件缓存,并检查缓存
+        # 如果 key 名字缓存则直接将缓存的文件还原到 path 目录，从而减少 workflows(工作流)运行时间
+        # 若 key 没命中缓存时，在当前 Job 完成时将自动创建新缓存
       - name: Cache operation
-      # 缓存是否命中的结果将存储到 steps.[id].output.cache-hit 里，该变量在继后的 step 中可读
-      id: cache-dependencies
-      uses: actions/cache@v3
-      with:
-        # 缓存文件目录的路径
-        path: |
-          **/node_modules
-        # key 中定义缓存标志位的生成方式。runner.OS 指当前环境的系统。外加对yarn.lock内容生成哈希码作为key值，如果yarn.lock改变则代表依赖有变化。
-        # 这里用yarn.lock而不是package.json是因为package.json中还有version和description之类的描述项目但和依赖无关的属性
-        key: ${{runner.OS}}-${{hashFiles('**/yarn.lock')}}
+        # 缓存是否命中的结果将存储到 steps.[id].output.cache-hit 里，该变量在继后的 step 中可读
+        id: cache-dependencies
+        uses: actions/cache@v3
+        with:
+          # 缓存文件目录的路径
+          path: |
+            **/node_modules
+          # key 中定义缓存标志位的生成方式。runner.OS 指当前环境的系统。外加对yarn.lock内容生成哈希码作为key值，如果yarn.lock改变则代表依赖有变化。
+          # 这里用yarn.lock而不是package.json是因为package.json中还有version和description之类的描述项目但和依赖无关的属性
+          key: ${{runner.OS}}-${{hashFiles('**/yarn.lock')}}
       # 安装依赖
       - name: Installing Dependencies
-      # 如果缓存未命中，则执行该steps，反之则跳过该steps
-      if: steps.cache-dependencies.outputs.cache-hit != 'true'
-      run: yarn install
-      # 运行代码扫描
+        # 如果缓存未命中，则执行该steps，反之则跳过该steps
+        if: steps.cache-dependencies.outputs.cache-hit != 'true'
+        run: yarn install
+        # 运行代码扫描
       - name: Running Lint
-      run: yarn lint
-      # 运行自动化测试
+        run: yarn lint
+        # 运行自动化测试
       - name: Running Test
-      run: yarn test
+        run: yarn test
