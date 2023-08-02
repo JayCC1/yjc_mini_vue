@@ -13,7 +13,7 @@ jobs:
     name: checkout repository
     uses: actions/checkout@v2
     # 给当前环境下载 node
-    name: use node.js
+    name: Use Node.js
     uses: actions/setup-node@v3
     with:
       node-version: "16.x"
