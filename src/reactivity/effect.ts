@@ -2,10 +2,15 @@ import { extend } from '../shared'
 
 class ReactiveEffect {
   private _fn: any
+
   deps = []
+
   active = true
+
   onStop?: () => void
+
   public scheduler: Function | undefined
+
   constructor(fn, scheduler?: Function) {
     this._fn = fn
     this.scheduler = scheduler
@@ -54,8 +59,8 @@ export function track(target, key) {
 }
 
 export function trigger(target, key) {
-  let depsMap = targetMap.get(target)
-  let dep = depsMap.get(key)
+  const depsMap = targetMap.get(target)
+  const dep = depsMap.get(key)
 
   for (const effect of dep) {
     if (effect.scheduler) {

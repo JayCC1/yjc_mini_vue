@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "test": "jest",
-    "scripts": "eslint 'src/**/*.{js,ts}' --fix"
+    "lint": "eslint src/**/*.{js,ts} --fix"
   },
   "devDependencies": {
     "@babel/core": "^7.22.5",
