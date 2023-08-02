@@ -7,7 +7,9 @@ on:
 jobs:
   # 定义工作流名称
   CI:
+    name: ci workflow
     runs-on: ubuntu-latest
+
     steps:
       # 拉取检测项目代码
       - name: checkout repository
