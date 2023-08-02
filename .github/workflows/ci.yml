@@ -1,21 +1,22 @@
-name: code detection and unit test
+name: Code detection and unit test
+
 # Event设置为main分支的pull request事件，
 # 这里的main分支相当于master分支，github项目新建是把main设置为默认分支，我懒得改了所以就保持这样吧
-on:
-  push:
+on: 
+  push: 
     branches: main
-jobs:
+jobs: 
   # 定义工作流名称
-  CI:
+  CI: 
     runs-on: ubuntu-latest
-    steps:
+    steps: 
       # 拉取检测项目代码
       name: checkout repository
       uses: actions/checkout@v2
       # 给当前环境下载 node
       name: Use Node.js
       uses: actions/setup-node@v3
-      with:
+      with: 
         node-version: "16.x"
       # 设置文件缓存,并检查缓存
       # 如果 key 名字缓存则直接将缓存的文件还原到 path 目录，从而减少 workflows(工作流)运行时间
@@ -24,7 +25,7 @@ jobs:
       # 缓存是否命中的结果将存储到 steps.[id].output.cache-hit 里，该变量在继后的 step 中可读
       id: cache-dependencies
       uses: actions/cache@v3
-      with:
+      with: 
         # 缓存文件目录的路径
         path: |
           **/node_modules
