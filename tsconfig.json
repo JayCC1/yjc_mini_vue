@@ -28,12 +28,12 @@
     "module": "ESNext" /* 指定使用模块: 'commonjs', 'amd', 'system', 'umd' or 'es2015' */,
     // "rootDir": "./",                                  /* Specify the root folder within your source files. */
     "moduleResolution": "Node" /* 选择模块解析策略： 'node' (Node.js) or 'classic' (TypeScript pre-1.6) */,
-    "baseUrl": "./" /* Specify the base directory to resolve non-relative module names. */,
-    "paths": {
-      // 模块名到基于 baseUrl 的路径映射的列表
-      "@/*": ["./src/*"]
-    } /* Specify a set of entries that re-map imports to additional lookup locations. */,
-    // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
+    // "baseUrl": "./" /* Specify the base directory to resolve non-relative module names. */,
+    // "paths": {
+    //   // 模块名到基于 baseUrl 的路径映射的列表
+    //   "@/*": ["./src/*"]
+    // },
+    /* Specify a set of entries that re-map imports to additional lookup locations. */ // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
     // "typeRoots": [],                                  /* Specify multiple folders that act like './node_modules/@types'. */
     "types": [
       "jest"
