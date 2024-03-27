@@ -75,8 +75,9 @@ let activeEffect
 export function effect(fn, options: any = {}) {
   // fn
   const _effect = new ReactiveEffect(fn, options.scheduler)
-  // options
-  // extend
+  // options 优化前
+  // Object.assign(_effect, options);
+  // 由于这个函数可以理解为是公共需要使用的函数，且能够更加美化、语义化，所以对方法进行抽离
   extend(_effect, options)
 
   _effect.run()

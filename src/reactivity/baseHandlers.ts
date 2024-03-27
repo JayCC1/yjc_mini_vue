@@ -1,6 +1,7 @@
 import { track, trigger } from './effect'
 import { ReactiveFlags } from './reactive'
 
+// 优化：实际createGetter 函数可以只在初始化时调用一次即可，后续都沿用初始化时创建好的get方法
 // 场景：每次使用的时候都会创建一个 get/set 函数
 // 可以利用缓存机制，只创建一次
 const get = createGetter()
@@ -17,6 +18,7 @@ function createGetter(isReadonly = false) {
     }
     const res = Reflect.get(target, key)
     if (!isReadonly) {
+      // 依赖收集
       track(target, key)
     }
     return res
