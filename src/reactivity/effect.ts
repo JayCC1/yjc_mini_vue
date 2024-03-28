@@ -57,8 +57,7 @@ function cleanupEffect(effect) {
 
 const targetMap = new Map()
 export function track(target, key) {
-  if (!activeEffect) return
-  if (!shouldTrack) return
+  if (!isTracking()) return
 
   // target ==> key ==> dep
   let depsMap = targetMap.get(target)
@@ -73,8 +72,14 @@ export function track(target, key) {
     depsMap.set(key, dep)
   }
 
+  // 已经在 dep 中，没必要在添加
+  if (dep.has(activeEffect)) return
   dep.add(activeEffect)
   activeEffect.deps.push(dep)
+}
+
+function isTracking() {
+  return shouldTrack && activeEffect !== undefined
 }
 
 export function trigger(target, key) {
