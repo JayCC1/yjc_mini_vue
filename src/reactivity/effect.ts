@@ -1,5 +1,7 @@
 import { extend } from '../shared'
 
+let activeEffect // 当前effect依赖实例对象存储
+let shouldTrack // 是否需要进行依赖收集操作
 class ReactiveEffect {
   private _fn: any
 
@@ -18,7 +20,21 @@ class ReactiveEffect {
 
   run() {
     activeEffect = this
-    return this._fn()
+    // 1.会收集依赖
+    //    shouldTrack 来做区分
+    //    this.active可以区分当前是否使用了 stop 方法
+    if (!this.active) {
+      return this._fn()
+    }
+
+    shouldTrack = true
+    activeEffect = this
+
+    const result = this._fn()
+    // reset
+    shouldTrack = false
+
+    return result
   }
 
   stop() {
@@ -36,10 +52,14 @@ function cleanupEffect(effect) {
   effect.deps.forEach((dep: any) => {
     dep.delete(effect)
   })
+  effect.deps.length = 0
 }
 
 const targetMap = new Map()
 export function track(target, key) {
+  if (!activeEffect) return
+  if (!shouldTrack) return
+
   // target ==> key ==> dep
   let depsMap = targetMap.get(target)
   if (!depsMap) {
@@ -53,7 +73,6 @@ export function track(target, key) {
     depsMap.set(key, dep)
   }
 
-  if (!activeEffect) return
   dep.add(activeEffect)
   activeEffect.deps.push(dep)
 }
@@ -71,7 +90,6 @@ export function trigger(target, key) {
   }
 }
 
-let activeEffect
 export function effect(fn, options: any = {}) {
   // fn
   const _effect = new ReactiveEffect(fn, options.scheduler)
