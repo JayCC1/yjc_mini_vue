@@ -30,6 +30,13 @@ module.exports = {
     'no-console': 'off',
     'no-restricted-syntax': 'off',
     'no-plusplus': 'off',
+    'no-param-reassign': [
+      'error',
+      {
+        props: true,
+        ignorePropertyModificationsFor: ['effect'],
+      },
+    ],
   },
   settings: {
     'import/resolver': {
