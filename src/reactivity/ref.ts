@@ -69,3 +69,24 @@ export function unRef(ref) {
   // false: return ref
   return isRef(ref) ? ref._rawValue : ref
 }
+
+export function proxyRefs(objectWithRefs) {
+  return new Proxy(objectWithRefs, {
+    get(target, key, receiver) {
+      // 测试逻辑梳理
+      // get ==> age(if is ref) 那么就返回 .value
+      // if not ref 则返回 value
+      return unRef(Reflect.get(target, key, receiver))
+    },
+    set(target, key, value) {
+      // set ==> age(if is ref) 那么就修改 .value 的值
+      let res
+      if (isRef(target[key]) && !isRef(value)) {
+        return (target[key].value = value)
+      } else {
+        res = Reflect.set(target, key, value)
+      }
+      return res
+    },
+  })
+}

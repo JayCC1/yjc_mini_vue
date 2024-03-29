@@ -1,6 +1,6 @@
 import { effect } from '../effect'
 import { reactive } from '../reactive'
-import { isRef, ref, unRef } from '../ref'
+import { isRef, proxyRefs, ref, unRef } from '../ref'
 
 describe('ref', () => {
   it('happy path', () => {
@@ -61,5 +61,36 @@ describe('ref', () => {
     expect(unRef(1)).toBe(1)
     expect(userRef).not.toBe(user)
     expect(unRef(userRef)).toBe(user)
+  })
+
+  it('proxyRefs', () => {
+    // 使用场景如:
+    // vue3 中的 template
+    // 例：const A = ref(1)
+    // template 中使用 A的值,是直接写 <span>{{A}}</span> 的，而不是 A.value
+
+    const user = {
+      age: ref(10),
+      name: 'xiaohong',
+    }
+
+    // get 相关逻辑单侧
+    // 测试逻辑梳理
+    // get ==> age(if is ref) 那么就返回 .value
+    // if not ref 则返回 value
+    const proxyUser = proxyRefs(user)
+    expect(user.age.value).toBe(10)
+    expect(proxyUser.age).toBe(10)
+    expect(proxyUser.name).toBe('xiaohong')
+
+    // set 相关逻辑单侧
+    // set ==> age(if is ref) 那么就修改 .value 的值
+    proxyUser.age = 20
+    expect(proxyUser.age).toBe(20)
+    expect(user.age.value).toBe(20)
+
+    proxyUser.age = ref(10)
+    expect(proxyUser.age).toBe(10)
+    expect(user.age.value).toBe(10)
   })
 })
