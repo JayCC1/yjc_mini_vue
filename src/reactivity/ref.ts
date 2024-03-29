@@ -1,4 +1,5 @@
-import { isTracking, track, trackEffects, triggerEffect } from './effect'
+import { hasChanged } from '../shared'
+import { isTracking, trackEffects, triggerEffect } from './effect'
 
 class RefImpl {
   private _value: any
@@ -11,9 +12,7 @@ class RefImpl {
   }
 
   get value() {
-    if (isTracking()) {
-      trackEffects(this.dep)
-    }
+    trackRefValue(this)
     return this._value
   }
 
@@ -21,9 +20,17 @@ class RefImpl {
     // 步骤一定是先修改了 value 的值，然后才执行依赖触发流程
 
     // newValue ==> this._value
-    if (Object.is(newValue, this._value)) return
-    this._value = newValue
-    triggerEffect(this.dep)
+    // hasChanged
+    if (hasChanged(this._value, newValue)) {
+      this._value = newValue
+      triggerEffect(this.dep)
+    }
+  }
+}
+
+function trackRefValue(ref) {
+  if (isTracking()) {
+    trackEffects(ref.dep)
   }
 }
 
