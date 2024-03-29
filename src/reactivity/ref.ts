@@ -11,8 +11,11 @@ import { reactive } from './reactive'
 
 class RefImpl {
   private _value: any
+
   private _rawValue: any
+
   public __v_isRef = true
+
   public dep
 
   constructor(value) {
@@ -80,13 +83,12 @@ export function proxyRefs(objectWithRefs) {
     },
     set(target, key, value) {
       // set ==> age(if is ref) 那么就修改 .value 的值
-      let res
-      if (isRef(target[key]) && !isRef(value)) {
-        return (target[key].value = value)
-      } else {
-        res = Reflect.set(target, key, value)
+      const oldValue = target[key]
+      if (isRef(oldValue) && !isRef(value)) {
+        oldValue.value = value
+        return true
       }
-      return res
+      return Reflect.set(target, key, value)
     },
   })
 }
