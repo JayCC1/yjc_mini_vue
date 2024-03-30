@@ -2,8 +2,11 @@
   "name": "yjc_mini_vue",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "git@github.com:JayCC1/yjc_mini_vue.git",
-  "author": "Jaycee <1093033394@qq.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JayCC1/yjc_mini_vue.git"
+  },
+  "author": "JayCC1 <1093033394@qq.com>",
   "license": "MIT",
   "scripts": {
     "preinstall": "npx only-allow yarn",
