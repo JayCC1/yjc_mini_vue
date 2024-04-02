@@ -2,7 +2,7 @@ import { extend } from '../shared'
 
 let activeEffect // 当前effect依赖实例对象存储
 let shouldTrack // 是否需要进行依赖收集操作
-class ReactiveEffect {
+export class ReactiveEffect {
   private _fn: any
 
   deps = []
@@ -19,7 +19,6 @@ class ReactiveEffect {
   }
 
   run() {
-    activeEffect = this
     // 1.会收集依赖
     //    shouldTrack 来做区分
     //    this.active可以区分当前是否使用了 stop 方法
