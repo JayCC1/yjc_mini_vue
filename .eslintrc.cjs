@@ -34,7 +34,7 @@ module.exports = {
       'error',
       {
         props: true,
-        ignorePropertyModificationsFor: ['effect'],
+        ignorePropertyModificationsFor: ['effect', 'instance'],
       },
     ],
   },
