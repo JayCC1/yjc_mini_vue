@@ -1,8 +1,8 @@
 {
   "name": "yjc_mini_vue",
   "version": "1.0.0",
-  "main": "lib/yjc_mini_vue.cjs.js",
-  "module": "lib/yjc_mini_vue.esm.js",
+  "main": "lib/yjc-mini-vue.cjs.js",
+  "module": "lib/yjc-mini-vue.esm.js",
   "type": "module",
   "repository": {
     "type": "git",
