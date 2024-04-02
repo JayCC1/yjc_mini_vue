@@ -10,7 +10,9 @@ export function render(vnode, container) {
 function patch(vnode, container) {
   // 去处理组件
 
-  // 判断 是不是 element
+  // TODO 判断 vnode 是不是一个 element
+  // 是 element 那么就应该处理 element
+  // 思考题：如何去区分是 element 还是 component 类型呢？
   processComponent(vnode, container)
 }
 function processComponent(vnode: any, container: any) {

@@ -1,3 +1,5 @@
+import { h } from '../../lib/yjc-mini-vue.esm.js'
+
 export const App = {
   // 平常都是写 .vue 单文件组件
   // 用 <template></template> 模板编译去写，目前还没有实现

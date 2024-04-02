@@ -1,7 +1,9 @@
 {
   "name": "yjc_mini_vue",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "lib/yjc_mini_vue.cjs.js",
+  "module": "lib/yjc_mini_vue.esm.js",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/JayCC1/yjc_mini_vue.git"
@@ -11,12 +13,14 @@
   "scripts": {
     "preinstall": "npx only-allow yarn",
     "test": "jest",
+    "build": "rollup -c -w",
     "lint": "eslint src/**/*.{js,ts} --fix"
   },
   "devDependencies": {
     "@babel/core": "7.23.2",
     "@babel/preset-env": "7.23.2",
     "@babel/preset-typescript": "7.23.2",
+    "@rollup/plugin-typescript": "^11.1.6",
     "@types/jest": "^29.5.2",
     "@typescript-eslint/eslint-plugin": "^5.60.1",
     "@typescript-eslint/parser": "^5.60.1",
@@ -28,6 +32,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "jest": "^29.5.0",
     "prettier": "^2.8.8",
+    "rollup": "^4.13.2",
     "typescript": "^5.1.6"
   },
   "dependencies": {}
