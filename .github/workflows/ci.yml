@@ -18,7 +18,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16.x'
+          node-version: '18.x'
         # 设置文件缓存,并检查缓存
         # 如果 key 名字缓存则直接将缓存的文件还原到 path 目录，从而减少 workflows(工作流)运行时间
         # 若 key 没命中缓存时，在当前 Job 完成时将自动创建新缓存
