@@ -2,8 +2,11 @@ import { ReactiveEffect } from './effect'
 
 class ComputedRefImpl {
   private _getter: any
-  private _dirty: boolean = true
+
+  private _dirty = true
+
   private _value: any
+
   private _effect: ReactiveEffect
 
   constructor(getter) {
@@ -14,6 +17,7 @@ class ComputedRefImpl {
       }
     })
   }
+
   get value() {
     // get
     // 依赖改变了 ==> dirty -> true

@@ -37,7 +37,7 @@ describe('computed', () => {
     expect(getter).toHaveBeenCalledTimes(1)
 
     // // should not compute again
-    cValue.value
+    let val = cValue.value
     expect(getter).toHaveBeenCalledTimes(1)
 
     // // should not compute until needed
@@ -49,7 +49,7 @@ describe('computed', () => {
     expect(getter).toHaveBeenCalledTimes(2)
 
     // // should not compute again
-    cValue.value
+    val = cValue.value
     expect(getter).toHaveBeenCalledTimes(2)
   })
 })
