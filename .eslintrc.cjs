@@ -31,11 +31,12 @@ module.exports = {
     'no-restricted-syntax': 'off',
     'no-plusplus': 'off',
     'guard-for-in': 'off',
+    'no-multi-assign': 'off',
     'no-param-reassign': [
       'error',
       {
         props: true,
-        ignorePropertyModificationsFor: ['effect', 'instance'],
+        ignorePropertyModificationsFor: ['effect', 'instance', 'vnode', 'initialVNode'],
       },
     ],
   },

@@ -14,5 +14,6 @@ export const PublicInstanceProxyHandlers = {
     if (publicGetter) {
       return publicGetter(instance)
     }
+    return undefined
   },
 }
