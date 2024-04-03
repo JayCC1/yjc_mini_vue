@@ -14,7 +14,6 @@ function patch(vnode, container) {
   // TODO 判断 vnode 是不是一个 element
   // 是 element 那么就应该处理 element
   // 思考题：如何去区分是 element 还是 component 类型呢？
-  console.log(vnode.type)
   if (typeof vnode.type === 'string') {
     processElement(vnode, container)
   } else if (isObject(vnode.type)) {
@@ -30,7 +29,7 @@ function processElement(vnode: any, container: any) {
 }
 
 function mountElement(vnode: any, container: any) {
-  const el = document.createElement(vnode.type)
+  const el = (vnode.el = document.createElement(vnode.type))
 
   // 对应 vnode 中的 children，children 中又可分为两种类型
   // 1. string
@@ -62,18 +61,22 @@ function processComponent(vnode: any, container: any) {
   mountComponent(vnode, container)
 }
 
-function mountComponent(vnode: any, container: any) {
-  const instance = createComponentInstance(vnode)
+function mountComponent(initialVNode: any, container: any) {
+  const instance = createComponentInstance(initialVNode)
 
   setupComponent(instance)
 
-  setupRenderEffect(instance, container)
+  setupRenderEffect(instance, initialVNode, container)
 }
-function setupRenderEffect(instance: any, container: any) {
-  const subTree = instance.render()
+function setupRenderEffect(instance: any, initialVNode, container: any) {
+  const { proxy } = instance
+  const subTree = instance.render.call(proxy)
 
   // subTree 就是虚拟节点树
   // vnode 是组件时继续走 patch
   // vnode 是element 则 mountElement挂载
   patch(subTree, container)
+
+  // subTree 一层层往下的，所以 subTree 中的 el 也就是根节点
+  initialVNode.el = subTree.el
 }
