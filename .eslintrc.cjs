@@ -32,6 +32,7 @@ module.exports = {
     'no-plusplus': 'off',
     'guard-for-in': 'off',
     'no-multi-assign': 'off',
+    'no-bitwise': 'off',
     'no-param-reassign': [
       'error',
       {
