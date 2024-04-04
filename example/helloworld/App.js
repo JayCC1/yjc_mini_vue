@@ -19,6 +19,12 @@ export const App = {
       {
         id: 'root',
         class: ['red', 'hard'],
+        onClick() {
+          console.log('click')
+        },
+        onMousedown() {
+          console.log('mousedown')
+        },
       },
       // setupState 获取值
       // this.$el 获取当前组件的根元素（在当前组件中也就是 div）
