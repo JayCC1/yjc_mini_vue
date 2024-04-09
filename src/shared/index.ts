@@ -24,5 +24,5 @@ export const capitalize = (str: string) => {
 
 // 使用例子 入参str: add  函数返回结果为：onAdd
 export const toHandlerKey = (str: string) => {
-  return str ? 'on' + capitalize(str) : ''
+  return str ? `on${capitalize(str)}` : ''
 }
