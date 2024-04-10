@@ -26,7 +26,7 @@
 
     /* Modules */
     "module": "ESNext" /* 指定使用模块: 'commonjs', 'amd', 'system', 'umd' or 'es2015' */,
-    // "rootDir": "./",                                  /* Specify the root folder within your source files. */
+    "rootDir": "./" /* Specify the root folder within your source files. */,
     "moduleResolution": "Node" /* 选择模块解析策略： 'node' (Node.js) or 'classic' (TypeScript pre-1.6) */,
     // "baseUrl": "./" /* Specify the base directory to resolve non-relative module names. */,
     // "paths": {
