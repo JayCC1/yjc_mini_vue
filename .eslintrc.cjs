@@ -35,19 +35,20 @@ module.exports = {
     'guard-for-in': 'off',
     'no-multi-assign': 'off',
     'no-bitwise': 'off',
-    'no-param-reassign': [
-      'error',
-      {
-        props: true,
-        ignorePropertyModificationsFor: ['effect', 'instance', 'vnode', 'initialVNode'],
-      },
-    ],
+    'no-param-reassign': 'off',
+    // 'no-param-reassign': [
+    //   'error',
+    //   {
+    //     props: true,
+    //     ignorePropertyModificationsFor: ['effect', 'instance', 'vnode', 'initialVNode'],
+    //   },
+    // ],
   },
   settings: {
     'import/resolver': {
       node: {
         extensions: ['.js', '.ts'],
-        moduleDirectory: ['node_modules', './src'],
+        moduleDirectory: ['./src'],
       },
     },
   },
